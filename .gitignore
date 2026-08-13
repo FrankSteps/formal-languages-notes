@@ -2,3 +2,8 @@
 *.log
 *.out
 *.toc
+*.aux
+*.glob
+*.vo
+*.vok
+*.vos
