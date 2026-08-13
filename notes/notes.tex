@@ -69,14 +69,175 @@ Aproveite o conteúdo.
 
 \subsection{Noções e terminologias matemáticas}
 
-\subsubsection{Conjuntos} % sipser + fundamentos elementares da matemática: conjuntos
-\subsubsection{Sequências e uplas} % guidorizzi
-\subsubsection{Funções e relações} % widman
+\subsubsection{Conjuntos}
+
+\paragraph{Notação de conjuntos}
+
+Um \textit{\textbf{conjunto}} é um grupo de objetos representados como uma unidade. Os conjuntos podem conter qualquer tipo de objeto como números, símbolos, conjuntos e entre outros. 
+Os objetos em um conjunto podem ser chamados de \textit{\textbf{membros}} ou \textit{\textbf{elementos}} \cite{sipser}. Um conjunto pode ser descrito de duas formas principais. A primeira é por 
+\textit{listagem}, enumerando seus elementos entre chaves, como em $\{1,2,3\}$. A segunda é por \textit{compreensão}, descrevendo uma propriedade ou uma regra de formação que caracteriza 
+exatamente os elementos do conjunto, como em
+
+\[
+    \{2n+1 \mid n \in \mathbb{N}\}
+\]
+
+que se lê "o conjunto de todos os números da forma $2n+1$, tais que $n$ é um número natural", isto é, o conjunto de todos os números naturais ímpares. A notação por compreensão é 
+especialmente útil quando o conjunto é infinito ou grande demais para ser listado.
+
+
+\paragraph{Pertinência}
+
+Dado um conjunto $A$, dizemos que um objeto $x$ \textit{pertence} a $A$, escrito $x \in A$, se $x$ é um dos elementos de $A$. Caso contrário, dizemos que $x$ \textit{não pertence} a $A$, 
+escrito $x \notin A$. Por exemplo, se $A = \{67,13,2\}$, então $13 \in A$, mas $5 \notin A$ \cite{murakami}.
+
+
+
+
+\paragraph{Conjunto vazio}
+
+O \textit{conjunto vazio}, denotado por $\emptyset$ ou $\{\}$, é o conjunto que não contém nenhum elemento. Para todo objeto $x$, temos $x \notin \emptyset$. O conjunto vazio é único: só 
+existe um conjunto sem elementos \cite{murakami}.
+
+
+
+
+\paragraph{Subconjuntos}
+
+Um conjunto $A$ é \textit{subconjunto} de um conjunto $B$, escrito $A \subseteq B$, se todo elemento de $A$ também é elemento de $B$. Formalmente,
+
+\[
+    A \subseteq B \iff \forall x\, (x \in A \rightarrow x \in B)
+\]
+
+Se além disso existir algum elemento de $B$ que não pertence a $A$, dizemos que $A$ é \textit{subconjunto próprio} de $B$, escrito $A \subsetneq B$. Todo conjunto é subconjunto de si mesmo 
+($A \subseteq A$), mas nenhum conjunto é subconjunto próprio de si mesmo. O conjunto vazio é subconjunto de qualquer conjunto, isto é, $\emptyset \subseteq A$ para todo $A$ \cite{murakami}. 
+
+
+
+\paragraph{Cardinalidade}
+
+A \textit{cardinalidade} de um conjunto $A$, denotada por $|A|$, é o número de elementos que ele contém. Um conjunto é \textit{finito} se sua cardinalidade é um número natural, e \textit{infinito} 
+caso contrário \cite{murakami}. Por exemplo, se $A = \{67,13,2\}$, então $|A| = 3$. Já $|\emptyset| = 0$.
+
+
+
+\paragraph{Conjunto das partes}
+
+O \textit{conjunto das partes} (ou \textit{conjunto potência}) de um conjunto $A$, denotado por $\mathcal{P}(A)$, é o conjunto de todos os subconjuntos de $A$, incluindo o próprio $A$ e o conjunto vazio \cite{murakami}. Por exemplo, se $A = \{0,1\}$, então
+
+\[
+\mathcal{P}(A) = \{\emptyset, \{0\}, \{1\}, \{0,1\}\}
+\]
+
+Se $A$ é finito, vale a relação $|\mathcal{P}(A)| = 2^{|A|}$.
+
+
+
+\paragraph{Operações entre conjuntos}
+
+Dados dois conjuntos $A$ e $B$, definem-se as seguintes operações:
+
+\begin{itemize}
+\item \textit{União}: $A \cup B = \{x \mid x \in A \text{ ou } x \in B\}$
+\item \textit{Interseção}: $A \cap B = \{x \mid x \in A \text{ e } x \in B\}$
+\item \textit{Diferença}: $A \setminus B = \{x \mid x \in A \text{ e } x \notin B\}$
+\item \textit{Complemento}: dado um conjunto universo $U$, o complemento de $A$ é $\overline{A} = U \setminus A$
+\end{itemize}
+
+Essas operações obedecem às \textit{leis de De Morgan}:
+
+\[
+\overline{A \cup B} = \overline{A} \cap \overline{B} \qquad \overline{A \cap B} = \overline{A} \cup \overline{B}
+\]
+
+
+\paragraph{Produto cartesiano}
+
+O \textit{produto cartesiano} de dois conjuntos $A$ e $B$, denotado por $A \times B$, é o conjunto de todos os \textit{pares ordenados} $(a,b)$ tais que $a \in A$ e $b \in B$:
+
+\[
+    A \times B = \{(a,b) \mid a \in A \text{ e } b \in B\}
+\]
+
+Diferente dos elementos de um conjunto, a ordem dentro de um par ordenado importa: $(a,b) \neq (b,a)$ em geral. Se $A$ e $B$ são finitos, então $|A \times B| = |A| \cdot |B|$. O produto cartesiano generaliza-se para $n$ conjuntos, produzindo \textit{$n$-uplas} $(a_1, a_2, \dots, a_n)$ \cite{murakami}.
+
+
+
+\subsubsection{Funções}
+
+\paragraph{O que é uma função?} É engraçado como essa pergunta ganhou duas respostas diferentes. Antes da universidade, no meu ensino médio, meu professor dizia que a função era o mercado. No Atacadão, por exemplo, temos o estoque com produtos variados e, no caixa, temos um ser condenado que vai 
+ficar responsável por colocar o preço nesses produtos. A regra é que um produto pode receber apenas 1 unico preço, mas nada impede de dois produtos distintos terem o mesmo preço e \textbf{TODOS} os produtos precisam ser precificados, ou seja, dada a função $f:A \to B$, todos os elementos do conjunto A
+precisam ter saída expressa no conjunto B. Já na universidade, uma função é descrita como uma máquina \textit{paia} que recebe um valor e retorna outro e a partir daí só vem detalhes mais técnicos. 
+
+Bem, ambas as explicações definem bem o que é uma função: Uma função, também chamada de mapeamento, é um objeto matemático que estabelece um relacionamento de entrada-saída. Uma função toma um elemento de um conjunto qualquer definido como entrada e produz um elemento de um conjunto qualquer definido como 
+saída. Em toda função, a mesma entrada sempre produz a mesma saída. \cite{sipser}
+
+\paragraph{Definição formal}
+
+% \[
+% f : A \to B,\qquad
+% x \mapsto f(x)
+% \]
+% 
+% \[
+% \forall x \in A,\quad f(x) \in B
+% \]
+% 
+% \[
+% \forall x \in A,\quad \exists! y \in B \text{ tal que } y=f(x).
+% \]
+
+\paragraph{Elementos fundamentais} % domínio, contradomínio, conjunto imagem
+
+\paragraph{Classificação teórica} % injetora, sobrejetora e bijetora 
+
+\paragraph{Composição de funções} 
+
+
+\paragraph{Exemplo prático com uma função inútil}
+
+
+% 
+%  Vamos definir uma função inútil que nem você 
+% 
+%  f{0} -> {0}
+% 
+%  essa função recebe um valor (apenas 0) e retorna, pasmem, 0!
+% 
+
+
+\paragraph{notas: } O livro do Widman apresenta sobre a teoria das categorias logo em seguida sem focar muito no formalismo matemático. Até o momento, não escrevi nada sobre, mas já dediquei uma seção (estruturas algébricas) só para ela nessas notas de estudo para eu não me esquecer. Pretendo pegar essa 
+matéria em breve. O professor Giovanny Lucero Palma, em sua tese de doutorado, parece ter usado muito das regras e fundamentos de estruturas algebricas para criar leis para a programação orientada a objetos. Confira: \url{https://repositorio.ufpe.br/bitstream/123456789/14930/1/GIovannyTesis.pdf}
+
+
+\subsubsection{O paradigma funcional} % Pretendo demonstrar a aplicação do paradigma funcional em Haskell e em Python 
+
+\paragraph{Objetivo}
+\paragraph{O que é o paradigma funcional?}
+\paragraph{Funções como cidadãos de primeira classe}
+\paragraph{Funções puras}
+\paragraph{Imutabilidade}
+\paragraph{Currying}
+\paragraph{Recursividade}
+\paragraph{Avaliação preguiçosa}
+\paragraph{Funções de alta ordem}
+\paragraph{Funções anônimas (lambda)}
+\paragraph{Tipos algébricos}
+\paragraph{Polimorfismo paramétrico}
+
+\paragraph{Simulação da paradigma orientado a objetos em Haskell} Widman, em seu livro, comenta que há maneiras de simular o paradigma orientado a objetos (POO) em Haskell apenas como uma curiosidade sem mostrar código. Após estudar o Haskell um pouco mais a fundo, consegui ter um bom resultado com ajuda
+da inteligência artificial. Não achei tão trivial chegar ao resultado esperado, tanto que tive que recorrer a uma IA e acredito que Widman deve ter pensado o mesmo, pois ele não colocou o código em Haskell.
+
+
+\subsubsection{Sequências e uplas} % guidorizzi e sipser (preciso de sequências aqui por que a mesma é  descrita como uma função f:N -> R)
 \subsubsection{Grafos} % sipser + curso da univesp
 \subsubsection{Cadeias e linguagens} % sipser
 
 
+
 \subsection{Métodos de Provas} % curso da univesp
+
 
 \subsubsection{Prova direta}
 \subsubsection{Prova por contraposição}
@@ -84,7 +245,8 @@ Aproveite o conteúdo.
 \subsubsection{Prova por indução}
 \subsubsection{Prova por divisão de casos}
 
-\subsection{Fundamentos da teoria dos grafos}
+
+\subsection{Fundamentos da teoria dos grafos} % cursos da univesp
 
 
 \section{Linguagens Formais e Autômatos}
@@ -129,6 +291,9 @@ PINTER, Charles C. \textit{A Book of Abstract Algebra}. 2nd ed. Mineola, N.Y.: D
 
 \bibitem{univesp}
 POSSANI, Claudio. \textit{Fundamentos Matemáticos da Computação}. Univesp, YouTube, 2017. Disponível em: \url{https://www.youtube.com/playlist?list=PLxI8Can9yAHcXBgFryV0AV7LYdLR1skuF}. Acesso em: 8 de agosto. 2026.
+
+\bibitem{murakami}
+IEZZI, Gelson; MURAKAMI, Carlos. \textit{Fundamentos de Matemática Elementar}, volume 1: Conjuntos e Funções. 9. ed. São Paulo: Atual Editora, 2013.
 
 \end{thebibliography}
 \end{document}
